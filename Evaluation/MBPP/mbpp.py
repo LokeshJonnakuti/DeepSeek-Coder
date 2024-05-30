@@ -197,7 +197,7 @@ class MBPP:
             logfile.close()
             timeout = 10
             runlang = self.language
-            res = evaluate_functional_correctness(input_file=logfilepath, problem_file=os.path.join(self.data_root, f"mbpp_test.jsonl"), tmp_dir=self.log_dir, timeout=timeout, language=runlang)
+            res = evaluate_functional_correctness(input_file=logfilepath, problem_file=os.path.join(self.data_root, "mbpp_test.jsonl"), tmp_dir=self.log_dir, timeout=timeout, language=runlang)
             print("score is", res['pass@%d' % self.k])
             os.remove(logfilepath)
         return

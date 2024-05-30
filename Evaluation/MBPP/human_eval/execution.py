@@ -66,7 +66,7 @@ def check_correctness(
                 except TimeoutException:
                     result.append("timed out")
                 except AssertionError as e:
-                    result.append(f"failed: AssertionError")
+                    result.append("failed: AssertionError")
                 except BaseException as e:
                     result.append(f"failed: {e}")
                 #print(sample["test_code"])
@@ -89,7 +89,7 @@ def check_correctness(
                 os.makedirs(tmp_dir)
             origin_path = os.getcwd()
             os.chdir(tmp_dir)
-            open(f"main_test.go", 'w').write(sample["test_code"])
+            open("main_test.go", 'w').write(sample["test_code"])
             try:
                 exec_result = None
                 with time_limit(timeout):
@@ -134,7 +134,7 @@ def check_correctness(
                 os.makedirs(tmp_dir)
             origin_path = os.getcwd()
             os.chdir(tmp_dir)
-            open(f"test.js", 'w').write(sample["test_code"])
+            open("test.js", 'w').write(sample["test_code"])
             try:
                 exec_result = None
                 with time_limit(timeout):
@@ -173,7 +173,7 @@ def check_correctness(
                 os.makedirs(tmp_dir)
 
             os.chdir(tmp_dir)
-            open(f"test.cpp", 'w').write(sample["test_code"])
+            open("test.cpp", 'w').write(sample["test_code"])
             if "162" in task_id:
                 compilation_result = subprocess.run(["/usr/bin/g++", "-std=c++17", "test.cpp", "-lcrypto", "-lssl"],
                                                     timeout=timeout,
@@ -233,7 +233,7 @@ def check_correctness(
                 os.makedirs(tmp_dir)
 
             os.chdir(tmp_dir)
-            open(f"test.php", 'w').write(sample["test_code"])
+            open("test.php", 'w').write(sample["test_code"])
             try:
                 exec_result = None
                 with time_limit(timeout):
@@ -271,7 +271,7 @@ def check_correctness(
                 os.makedirs(tmp_dir)
 
             os.chdir(tmp_dir)
-            open(f"test.sh", 'w').write(sample["test_code"])
+            open("test.sh", 'w').write(sample["test_code"])
             try:
                 exec_result = None
                 with time_limit(timeout):
@@ -310,7 +310,7 @@ def check_correctness(
 
             os.chdir(tmp_dir)
             env = {"PATH": f"{node_exec}:" + subprocess.os.environ["PATH"]}
-            open(f"test.ts", 'w').write(sample["test_code"])
+            open("test.ts", 'w').write(sample["test_code"])
             cmd = f"{tsc_exec}tsc test.ts --target ES2015 --lib ES2015,DOM"
             compilation_result = subprocess.run(cmd, timeout=timeout, capture_output=True, env=env, shell=True)
             if compilation_result.returncode != 0:
@@ -386,7 +386,7 @@ def check_correctness(
             if not os.path.exists(tmp_dir):
                 os.makedirs(tmp_dir)
             os.chdir(tmp_dir)
-            open(f"Program.cs", 'w').write(sample["test_code"])
+            open("Program.cs", 'w').write(sample["test_code"])
             cmd = f"{cs_exec}mcs -d:DEBUG Program.cs"
             compilation_result = subprocess.run(cmd, shell=True, capture_output=True)
             if compilation_result.returncode != 0:
@@ -483,10 +483,10 @@ def check_correctness(
                 if returned_val_execution == 0:
                     result.append("passed")
                 else:
-                   result.append(f"failed: execution error") 
+                   result.append("failed: execution error") 
 
             else:
-                result.append(f"failed: compilation error")
+                result.append("failed: compilation error")
 
 
         elif "java" in language_type.lower():
