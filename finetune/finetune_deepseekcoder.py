@@ -1,5 +1,4 @@
 import copy
-import random
 from dataclasses import dataclass, field
 from typing import Optional, Dict, Sequence
 
@@ -8,6 +7,7 @@ import torch.distributed
 import transformers
 from transformers import Trainer
 from datasets import load_dataset
+import secrets
 
 
 IGNORE_INDEX = -100
@@ -175,7 +175,7 @@ def train():
     
     if training_args.local_rank == 0:
         print("Training dataset samples:", len(train_dataset))
-        for index in random.sample(range(len(train_dataset)), 3):
+        for index in secrets.SystemRandom().sample(range(len(train_dataset)), 3):
             print(f"Sample {index} of the training set: {train_dataset[index]['input_ids']}, {train_dataset[index]['labels']}.")
             print(f"Sample {index} of the training set: {tokenizer.decode(list(train_dataset[index]['input_ids']))}.")
 
